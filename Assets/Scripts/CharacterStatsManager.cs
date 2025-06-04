@@ -61,19 +61,24 @@ public class CharacterStatsManager : MonoBehaviour
         return new Health(0, 0);
     }
 
-    public void AddItemsToInventory(List<ChestItemEntry> items)
+    // Increase quantity if item already exists
+    // Add new item with quantity if it does not exist
+    public void AddItemsToInventory(List<ChestItemEntry> gainedItems)
     {
-        foreach (var item in items)
+        // made with Claude.ai
+        foreach (var addedItem in gainedItems)
         {
-            if (this.items.ContainsKey(item.item))
+            Debug.Log($"Adding item: {addedItem.item.name} with quantity: {addedItem.quantity} to inventory.");
+            if (this.items.ContainsKey(addedItem.item))
             {
-                this.items[item.item] += item.quantity; // Increase quantity if item already exists
+                this.items[addedItem.item] += addedItem.quantity; 
             }
             else
             {
-                this.items.Add(item.item, item.quantity); // Add new item with quantity
+                this.items.Add(addedItem.item, addedItem.quantity); 
             }
         }
+        // end Claude.ai snippet
     }
 }
 

@@ -13,6 +13,21 @@ public class PauseMenueManager : MonoBehaviour
     public void TogglePauseMenu()
     {
         pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
+
+        DoStuff(pauseMenuUI.activeSelf);
+
         baseCC.PausePlayer(pauseMenuUI.activeSelf);
+    }
+
+    private void DoStuff(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            // populate
+        }
+        else
+        {
+            // clear
+        }
     }
 }

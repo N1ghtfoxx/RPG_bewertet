@@ -6,6 +6,9 @@ public class ChestManager : MonoBehaviour
 {
     [SerializeField] private GameObject openButton;
     [SerializeField] private List<ChestItemEntry> availableItems = new List<ChestItemEntry>();
+    [SerializeField] private SpriteRenderer chestSpriteRenderer;
+    [SerializeField] private Sprite closedChestSprite;
+    [SerializeField] private Sprite openChestSprite;
     private bool isChestOpen = false;
 
     private void Start()
@@ -17,6 +20,16 @@ public class ChestManager : MonoBehaviour
         else
         {
             openButton.SetActive(false); // Hide the button initially
+        }
+
+        if (chestSpriteRenderer == null)
+        {
+            chestSpriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        if (chestSpriteRenderer != null && closedChestSprite != null)
+        {
+            chestSpriteRenderer.sprite = closedChestSprite;
         }
     }
 
@@ -30,19 +43,33 @@ public class ChestManager : MonoBehaviour
         openButton.SetActive(false);
     }
 
+    // open chest and dissmiss openButton
+    // change sprite to open chest sprite
+    // clear list of items
     public void OpenChest()
     {
        isChestOpen = true;
-        openButton.SetActive(false); // Button ausblenden
+        openButton.SetActive(false); 
+
+        if (chestSpriteRenderer != null && openChestSprite != null)
+        {
+            chestSpriteRenderer.sprite = openChestSprite;
+        }
+        else
+        {
+            Debug.LogWarning("SpriteRenderer oder Open Chest Sprite ist nicht zugewiesen!");
+        }
+
         CharacterStatsManager.Instance.AddItemsToInventory(availableItems);
-        availableItems.Clear(); // Leere die Liste der verfügbaren Items
+        availableItems.Clear(); 
     }
 
 }
-
+// made with Claude.ai 
 [System.Serializable]
 public class ChestItemEntry
 {
-    public BaseItem item;       // Dein ScriptableObject
-    public int quantity;        // Anzahl Items, die in der Truhe enthalten sind
+    public BaseItem item;       // ScriptableObject
+    public int quantity;        // number of items contained in chest
 }
+// end Claude.ai snippet
