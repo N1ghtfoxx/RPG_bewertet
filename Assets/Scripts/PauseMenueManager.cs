@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PauseMenueManager : MonoBehaviour
@@ -23,11 +25,28 @@ public class PauseMenueManager : MonoBehaviour
     {
         if (isEnabled)
         {
-            // populate
+            PopulateInventory();// populate
         }
         else
         {
-            // clear
+            ClearInventory();// clear
+        }
+    }
+
+    private void PopulateInventory()
+    {
+        ClearInventory(); // delete all existing items in the inventory UI
+    }
+
+    private void ClearInventory()
+    {
+        // Destroy all existing ItemDataHolder objects in the pause menu UI
+        foreach (Transform child in pauseMenuUI.transform)
+        {
+            if (child.GetComponent<ItemDataHolder>() != null)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Gem
   m_EditorClassIdentifier: 
   itemName: Gem
-  itemDescription: 
+  itemDescription: Money
   itemPrice: 20
   itemIcon: {fileID: 21300000, guid: 9ed20a5564e5d694cbf9322747030227, type: 3}
   isConsumable: 0
-  isEquipped: 0
+  isEquipped: 1
   isUsableInBattle: 0
-  isUsableOutsideBattle: 0
+  isUsableOutsideBattle: 1
   isStackable: 0
   isSellable: 0
   isCraftable: 0
