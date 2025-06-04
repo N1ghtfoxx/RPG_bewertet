@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseItem : MonoBehaviour
+[CreateAssetMenu(fileName = "BaseItem", menuName = "Items/BaseItems")]
+public class BaseItem : ScriptableObject
 {
     [SerializeField] private string itemName;
     [SerializeField] private string itemDescription;

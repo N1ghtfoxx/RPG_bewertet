@@ -60,6 +60,21 @@ public class CharacterStatsManager : MonoBehaviour
         }
         return new Health(0, 0);
     }
+
+    public void AddItemsToInventory(List<ChestItemEntry> items)
+    {
+        foreach (var item in items)
+        {
+            if (this.items.ContainsKey(item.item))
+            {
+                this.items[item.item] += item.quantity; // Increase quantity if item already exists
+            }
+            else
+            {
+                this.items.Add(item.item, item.quantity); // Add new item with quantity
+            }
+        }
+    }
 }
 
 [Serializable]
