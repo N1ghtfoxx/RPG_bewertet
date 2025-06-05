@@ -55,11 +55,7 @@ public class ChestManager : MonoBehaviour
         {
             chestSpriteRenderer.sprite = openChestSprite;
         }
-        else
-        {
-            Debug.LogWarning("SpriteRenderer oder Open Chest Sprite ist nicht zugewiesen!");
-        }
-
+        
         CharacterStatsManager.Instance.AddItemsToInventory(availableItems);
         availableItems.Clear(); 
     }

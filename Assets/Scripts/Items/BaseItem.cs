@@ -19,6 +19,9 @@ public class BaseItem : ScriptableObject
     [SerializeField] private bool isTradable;
     [SerializeField] private bool isDestroyable;
     [SerializeField] private bool isQuestItem;
+
+    public string ItemName => itemName;
+    public Sprite ItemIcon => itemIcon;
 }
 
 
