@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BaseItem", menuName = "Items/BaseItems")]
+
 public class BaseItem : ScriptableObject
 {
     [SerializeField] private string itemName;
@@ -22,6 +24,19 @@ public class BaseItem : ScriptableObject
 
     public string ItemName => itemName;
     public Sprite ItemIcon => itemIcon;
+}
+
+[Serializable]
+public class BaseItemSaveData
+{
+    public string itemName;
+    public int itemCount;
+}
+
+[Serializable]
+public class BaseItemListSaveData
+{
+    public List<BaseItemSaveData> items;
 }
 
 

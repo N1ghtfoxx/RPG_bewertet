@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ChestManager : MonoBehaviour
@@ -11,8 +13,14 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private Sprite openChestSprite;
     private bool isChestOpen = false;
 
+    ChestSaveData chestSaveData = new ChestSaveData();
+
+    private string chestFilePath; 
+
     private void Start()
     {
+        chestFilePath = Path.Combine(Application.persistentDataPath, gameObject.name) + ".json";
+
         if (openButton == null)
         {
             Debug.LogError("Open Button is not assigned in the ChestManager script.");
@@ -27,10 +35,14 @@ public class ChestManager : MonoBehaviour
             chestSpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        if (chestSpriteRenderer != null && closedChestSprite != null)
+        LoadChestData();
+
+
+        if (chestSpriteRenderer != null && closedChestSprite != null && !isChestOpen)
         {
             chestSpriteRenderer.sprite = closedChestSprite;
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -57,10 +69,40 @@ public class ChestManager : MonoBehaviour
         }
         
         CharacterStatsManager.Instance.AddItemsToInventory(availableItems);
-        availableItems.Clear(); 
+
+        availableItems.Clear();
+
+        chestSaveData.isChestOpen = isChestOpen;
+
+        string jsonData = JsonUtility.ToJson(chestSaveData, true);
+
+        File.WriteAllText(chestFilePath, jsonData);
     }
 
+    private void LoadChestData()
+    {
+        if (File.Exists(chestFilePath))
+        {
+            string jsonData = File.ReadAllText(chestFilePath);
+            chestSaveData = JsonUtility.FromJson<ChestSaveData>(jsonData);
+            isChestOpen = chestSaveData.isChestOpen;
+
+            if (isChestOpen)
+            {
+                if (chestSpriteRenderer != null && openChestSprite != null)
+                {
+                    chestSpriteRenderer.sprite = openChestSprite;
+                }
+            }
+        }
+        else
+        {
+            // Initialize with default values if the file does not exist
+            chestSaveData.isChestOpen = false;
+        }
+    }
 }
+
 // made with Claude.ai 
 [System.Serializable]
 public class ChestItemEntry
@@ -69,3 +111,9 @@ public class ChestItemEntry
     public int quantity;        // number of items contained in chest
 }
 // end Claude.ai snippet
+
+[Serializable]
+public class ChestSaveData
+{
+    public bool isChestOpen;
+}
