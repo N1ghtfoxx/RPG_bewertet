@@ -57,7 +57,9 @@ public class ChestManager : MonoBehaviour
 
     // open chest and dissmiss openButton
     // change sprite to open chest sprite
-    // clear list of items
+    // save state of chest to a json file
+
+    // saving of chest state made with Osman-Tutorial ;)
     public void OpenChest()
     {
        isChestOpen = true;
@@ -71,11 +73,11 @@ public class ChestManager : MonoBehaviour
         CharacterStatsManager.Instance.AddItemsToInventory(availableItems);
 
         availableItems.Clear();
-
+        
         chestSaveData.isChestOpen = isChestOpen;
-
+        
         string jsonData = JsonUtility.ToJson(chestSaveData, true);
-
+        
         File.WriteAllText(chestFilePath, jsonData);
     }
 
@@ -112,8 +114,12 @@ public class ChestItemEntry
 }
 // end Claude.ai snippet
 
+
+// made with Osman-Tutorial ;)
+// This class is used to save the state of the chest (open or closed)
 [Serializable]
 public class ChestSaveData
 {
     public bool isChestOpen;
 }
+// end Osman-Tutorial

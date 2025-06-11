@@ -13,6 +13,7 @@ public class CharacterStatsManager : MonoBehaviour
     public Dictionary<string, bool> equipment { get; private set; }
     public Dictionary<BaseItem, int> items { get; private set; }
 
+    // define the file name and path for the inventory
     private string inventoryFileName = "inventory.json";
     private string inventoryFilePath;
 
@@ -23,10 +24,10 @@ public class CharacterStatsManager : MonoBehaviour
         {
             Instance = this;
 
-            // made with Claude.ai
-            // Dateipfad für Inventar festlegen
+// created with Claude.ai
+            // path to the inventory file
             inventoryFilePath = Path.Combine(Application.persistentDataPath, inventoryFileName);
-            // end Claude.ai snippet
+// end Claude.ai 
 
             Load();
         }
@@ -76,7 +77,8 @@ public class CharacterStatsManager : MonoBehaviour
     // Add new item with quantity if it does not exist
     public void AddItemsToInventory(List<ChestItemEntry> gainedItems)
     {
-        // made with Claude.ai
+
+// created with Claude.ai
         foreach (var addedItem in gainedItems)
         {
             Debug.Log($"Adding item: {addedItem.item.name} with quantity: {addedItem.quantity} to inventory.");
@@ -89,15 +91,18 @@ public class CharacterStatsManager : MonoBehaviour
                 this.items.Add(addedItem.item, addedItem.quantity);
             }
         }
-        // end Claude.ai snippet
+// end Claude.ai
 
         // save the inventory after adding items
         SaveInventory();
     }
-
+    
+// created with Claude.ai and Osman ;)
     private void SaveInventory()
     {
+        // Ensure the directory exists
         List<BaseItemSaveData> saveData = new List<BaseItemSaveData>();
+        // Check if the directory exists, if not create it
         foreach (var item in items)
         {
             var data = new BaseItemSaveData
@@ -107,27 +112,35 @@ public class CharacterStatsManager : MonoBehaviour
             };
             saveData.Add(data);
         }
+        // Serialize the inventory data to JSON
         BaseItemListSaveData saveDataWrapper = new BaseItemListSaveData { items = saveData };
+        // Create the JSON string from the save data
         string jsonData = JsonUtility.ToJson(saveDataWrapper, true);
-
+        // Ensure the directory exists
         File.WriteAllText(inventoryFilePath, jsonData);
     }
 
     private void LoadInventory()
     {
+        // Check if the directory exists, if not create it
         if (File.Exists(inventoryFilePath))
         {
+            // Read the JSON data from the file
             string jsonData = File.ReadAllText(inventoryFilePath);
+            // Deserialize the JSON data into a BaseItemListSaveData object
             BaseItemListSaveData saveDataWrapper = JsonUtility.FromJson<BaseItemListSaveData>(jsonData);
 
-            items.Clear(); // Sicherstellen, dass das Dictionary leer ist, bevor es befüllt wird
+            items.Clear(); // be sure to clear the existing items before loading new ones
 
+            // Populate the items dictionary with the loaded data
             foreach (var item in saveDataWrapper.items)
             {
+                // Load the BaseItem from resources using the itemName
                 BaseItem baseItem = Resources.Load<BaseItem>("Items/" + item.itemName);
+                // If the item was found, add it to the items dictionary
                 if (baseItem != null)
                 {
-                    items[baseItem] = item.itemCount; // Hinzufügen oder Aktualisieren der Menge
+                    items[baseItem] = item.itemCount; // add or update the item countS
                 }
                 else
                 {
@@ -140,9 +153,10 @@ public class CharacterStatsManager : MonoBehaviour
             Debug.LogWarning("Inventory-Datei nicht gefunden: " + inventoryFilePath);
         }
     }
+// end Claude.ai and Osman-Tutorial ;)
 }
 
-    [Serializable]
+[Serializable]
 public struct Health
 {
     public int health;

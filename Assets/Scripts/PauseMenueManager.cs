@@ -6,11 +6,11 @@ using UnityEngine;
 public class PauseMenueManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI;
-    [SerializeField] private GameObject itemPrefab; // Fügen Sie dies hinzu, um itemPrefab zu definieren
-    [SerializeField] private Transform itemContainer; // Fügen Sie dies hinzu, um itemContainer zu definieren
+    [SerializeField] private GameObject itemPrefab; // definition of itemPrefab
+    [SerializeField] private Transform itemContainer; // definition of itemContainer
 
     private BaseCharacterController baseCC;
-    private List<GameObject> spawnedItemUIs = new List<GameObject>(); // Fügen Sie dies hinzu, um spawnedItemUIs zu definieren
+    private List<GameObject> spawnedItemUIs = new List<GameObject>(); // definition of spawnedItemUIs
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class PauseMenueManager : MonoBehaviour
     {
         if (isEnabled)
         {
-            PopulateInventory();// populate
+            PopulateInventory();
         }
     }
 
@@ -38,36 +38,40 @@ public class PauseMenueManager : MonoBehaviour
     {
         ClearInventory(); // delete all existing items in the inventory UI
 
-        // 2. Items holen → Aus dem CharacterStatsManager
-        // 3. Für jedes Item:
+// created with Claude.ai
+        // 2. get the items from CharacterStatsManager
+        // 3. for each item in the items dictionary
         foreach (var itemPair in CharacterStatsManager.Instance.items)
         {
-            // Das Item und die Anzahl herausbekommen
-            BaseItem currentItem = itemPair.Key;    // Das Item selbst
-            int itemCount = itemPair.Value;         // Wie viele Stück
+            BaseItem currentItem = itemPair.Key;    // item
+            int itemCount = itemPair.Value;         // count
 
-            // 3a. Instantiate(itemPrefab, itemContainer) → Neues UI-Element erstellen
+            // 3a. Instantiate(itemPrefab, itemContainer) → new Item UI element
             GameObject newItemUI = Instantiate(itemPrefab, itemContainer);
 
-            // 3b. Element zur spawnedItemUIs Liste hinzufügen
+            // 3b. add element to the spawnedItemUIs list
             spawnedItemUIs.Add(newItemUI);
 
-            // 3c. Item-Daten ins UI-Element einsetzen
+            // 3c. place the item icon, name and count in the new UI element
             ItemDataHolder dataHolder = newItemUI.GetComponent<ItemDataHolder>();
             dataHolder.SetItemData(currentItem.ItemIcon, currentItem.ItemName, itemCount);
         }
+// end Claude.ai
     }
 
     private void ClearInventory()
     {
-        // 1. Geht durch alle Items in der spawnedItemUIs Liste
+
+// created with Claude.ai
+        // 1. go through the spawnedItemUIs list
         foreach (GameObject itemUI in spawnedItemUIs)
         {
-            // 2. Löscht jedes UI-Element mit Destroy()
+            // 2. destroy each item UI element
             Destroy(itemUI);
         }
 
-        // 3. Leert die Liste mit Clear()
+        // 3. clear the list
         spawnedItemUIs.Clear();
     }
+// end Claude.ai
 }

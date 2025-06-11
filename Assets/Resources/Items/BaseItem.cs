@@ -27,6 +27,7 @@ public class BaseItem : ScriptableObject
 }
 
 [Serializable]
+// This class is used to save the state of a BaseItem
 public class BaseItemSaveData
 {
     public string itemName;
@@ -34,6 +35,7 @@ public class BaseItemSaveData
 }
 
 [Serializable]
+// This class is used to save a list of BaseItemSaveData
 public class BaseItemListSaveData
 {
     public List<BaseItemSaveData> items;
