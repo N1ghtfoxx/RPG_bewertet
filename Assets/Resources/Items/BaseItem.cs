@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class BaseItem : ScriptableObject
 {
+    [SerializeField] private ItemType itemType; // Type of the item, e.g., Consumable, Equipment, etc.
     [SerializeField] private string itemName;
     [SerializeField] private string itemDescription;
     [SerializeField] private int itemPrice;
@@ -41,4 +42,12 @@ public class BaseItemListSaveData
     public List<BaseItemSaveData> items;
 }
 
-
+// This enum defines the different types of items that can exist in the game.   
+public enum ItemType
+{
+    Consumable,
+    Weapon,
+    Material,
+    Tool,
+    Money,
+}

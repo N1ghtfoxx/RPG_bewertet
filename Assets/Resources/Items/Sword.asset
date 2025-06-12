@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3de263bea0cd34393039d98b71dc6f, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  itemType: 1
   itemName: Sword
   itemDescription: Weapon
   itemPrice: 0
   itemIcon: {fileID: 21300000, guid: d625705c2b10393418fa45b27c7370b0, type: 3}
   isConsumable: 0
-  isEquipped: 0
+  isEquipped: 1
   isUsableInBattle: 1
   isUsableOutsideBattle: 1
   isStackable: 0
-  isSellable: 0
+  isSellable: 1
   isCraftable: 1
-  isTradable: 1
+  isTradable: 0
   isDestroyable: 0
   isQuestItem: 0

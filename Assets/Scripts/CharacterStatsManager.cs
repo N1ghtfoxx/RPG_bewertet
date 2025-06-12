@@ -13,9 +13,11 @@ public class CharacterStatsManager : MonoBehaviour
     public Dictionary<string, bool> equipment { get; private set; }
     public Dictionary<BaseItem, int> items { get; private set; }
 
+// created Claude.ai 
     // define the file name and path for the inventory
     private string inventoryFileName = "inventory.json";
     private string inventoryFilePath;
+// end Claude.ai
 
 
     void Start()
@@ -100,8 +102,12 @@ public class CharacterStatsManager : MonoBehaviour
         // save the inventory after adding items
         SaveInventory();
     }
-    
-// created with Claude.ai and Osman ;)
+
+ // created with Claude.ai and Osman-Tutorial ;)
+    //<summary>
+    // Saves the current state of the inventory to a JSON file.
+    // This method serializes the items in the inventory into a JSON format and writes it to a file.
+    //</summary>
     private void SaveInventory()
     {
         // Ensure the directory exists

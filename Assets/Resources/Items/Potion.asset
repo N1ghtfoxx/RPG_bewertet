@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3de263bea0cd34393039d98b71dc6f, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
+  itemType: 0
   itemName: Potion
   itemDescription: heals damage
   itemPrice: 0
@@ -22,7 +23,7 @@ MonoBehaviour:
   isUsableOutsideBattle: 1
   isStackable: 0
   isSellable: 0
-  isCraftable: 0
-  isTradable: 0
+  isCraftable: 1
+  isTradable: 1
   isDestroyable: 0
   isQuestItem: 0

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3de263bea0cd34393039d98b71dc6f, type: 3}
   m_Name: Gem
   m_EditorClassIdentifier: 
+  itemType: 4
   itemName: Gem
-  itemDescription: Money
+  itemDescription: Valuable Item
   itemPrice: 20
   itemIcon: {fileID: 21300000, guid: 9ed20a5564e5d694cbf9322747030227, type: 3}
   isConsumable: 0

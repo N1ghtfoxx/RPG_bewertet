@@ -12,13 +12,19 @@ public class ChestManager : MonoBehaviour
     [SerializeField] private Sprite closedChestSprite;
     [SerializeField] private Sprite openChestSprite;
     private bool isChestOpen = false;
-
+ 
+    // This class is used to save the state of the chest (open or closed) and the items it contains
     ChestSaveData chestSaveData = new ChestSaveData();
+    // This variable holds the file path where the chest state will be saved
+    private string chestFilePath;
 
-    private string chestFilePath; 
-
+    //<summary>
+    // This method initializes the ChestManager, sets the chest sprite, and loads the chest data from a file
+    // It also sets up the open button and hides it initially.
+    //</summary>
     private void Start()
     {
+        // Define the file path for saving the chest state
         chestFilePath = Path.Combine(Application.persistentDataPath, gameObject.name) + ".json";
 
         if (openButton == null)
@@ -34,7 +40,7 @@ public class ChestManager : MonoBehaviour
         {
             chestSpriteRenderer = GetComponent<SpriteRenderer>();
         }
-
+        // Load the chest data from the file
         LoadChestData();
 
 
@@ -84,6 +90,7 @@ public class ChestManager : MonoBehaviour
         File.WriteAllText(chestFilePath, jsonData);
     }
 
+    // This method loads the chest data from a JSON file, setting the chest state and sprite accordingly
     private void LoadChestData()
     {
         if (File.Exists(chestFilePath))
