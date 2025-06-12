@@ -21,13 +21,15 @@ public class PauseMenueManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
 
-        DoStuff(pauseMenuUI.activeSelf);
+        HandlePauseMenuState(pauseMenuUI.activeSelf);
 
         baseCC.PausePlayer(pauseMenuUI.activeSelf);
     }
 
-    private void DoStuff(bool isEnabled)
+    // This method is called when the pause menu is enabled or disabled
+    private void HandlePauseMenuState(bool isEnabled)
     {
+        // If the pause menu is enabled, populate the inventory
         if (isEnabled)
         {
             PopulateInventory();

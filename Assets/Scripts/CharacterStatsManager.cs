@@ -73,8 +73,12 @@ public class CharacterStatsManager : MonoBehaviour
         return new Health(0, 0);
     }
 
-    // Increase quantity if item already exists
-    // Add new item with quantity if it does not exist
+    //<summary>
+    // Adds items to the inventory and updates the item count.
+    // If the item already exists in the inventory, it increases the count by the specified quantity.
+    // If the item does not exist, it adds the item with the specified quantity.
+    // This method is called when items are gained, such as from a chest or other sources.
+    //</summary>
     public void AddItemsToInventory(List<ChestItemEntry> gainedItems)
     {
 

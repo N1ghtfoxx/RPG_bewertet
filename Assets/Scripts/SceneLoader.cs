@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//<summary>
+// SceneLoader is a script that loads a specified scene when an object with a specific tag enters its trigger collider.
+// It is attached to a GameObject with a Collider2D component set as a trigger.
+// The scene to load is specified by the 'sceneName' variable, and the tag to check is specified by 'tagToCheck'.
+// </summary>
 public class SceneLoader : MonoBehaviour
 {
     public string tagToCheck;

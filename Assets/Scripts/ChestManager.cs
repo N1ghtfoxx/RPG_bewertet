@@ -55,9 +55,12 @@ public class ChestManager : MonoBehaviour
         openButton.SetActive(false);
     }
 
+    //<summary>
     // open chest and dissmiss openButton
     // change sprite to open chest sprite
     // save state of chest to a json file
+    // add items to inventory
+    //</summary>
 
     // saving of chest state made with Osman-Tutorial ;)
     public void OpenChest()
