@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PauseMenueManager : MonoBehaviour
 {
@@ -17,12 +18,23 @@ public class PauseMenueManager : MonoBehaviour
         baseCC = FindObjectOfType<BaseCharacterController>();
     }
 
-    public void TogglePauseMenu()
-    {
-        pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
+    //public void TogglePauseMenu()
+    //{
+    //    pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
 
+    //    HandlePauseMenuState(pauseMenuUI.activeSelf);
+
+    //    baseCC.PausePlayer(pauseMenuUI.activeSelf);
+    //}
+
+    public void TogglePauseMenu(CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        pauseMenuUI.SetActive(!pauseMenuUI.activeSelf);
         HandlePauseMenuState(pauseMenuUI.activeSelf);
 
+        if (baseCC == null) baseCC = FindObjectOfType<BaseCharacterController>();
         baseCC.PausePlayer(pauseMenuUI.activeSelf);
     }
 
@@ -39,8 +51,9 @@ public class PauseMenueManager : MonoBehaviour
     private void PopulateInventory()
     {
         ClearInventory(); // delete all existing items in the inventory UI
+        Debug.Log("Items im Inventar: " + CharacterStatsManager.Instance.items.Count);
 
-// created with Claude.ai
+        // created with Claude.ai
         // 2. get the items from CharacterStatsManager
         // 3. for each item in the items dictionary
         foreach (var itemPair in CharacterStatsManager.Instance.items)

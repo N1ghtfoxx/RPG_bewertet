@@ -29,7 +29,9 @@ public class CharacterStatsManager : MonoBehaviour
 // created with Claude.ai
             // path to the inventory file
             inventoryFilePath = Path.Combine(Application.persistentDataPath, inventoryFileName);
-// end Claude.ai 
+            //Debug.Log("Speicherort: " + Application.persistentDataPath);
+            //Application.OpenURL(Application.persistentDataPath);
+            // end Claude.ai 
 
             Load();
         }
@@ -44,8 +46,15 @@ public class CharacterStatsManager : MonoBehaviour
         characterExp = new Dictionary<string, int>();
         characterHP = new Dictionary<string, Health>();
 
+        //foreach (var item in characterData)
+        //{
+        //    characterExp.Add(item.entityName, 0);
+        //    characterHP.Add(item.entityName, new Health(item.baseMaxHealth, item.baseMaxHealth));
+        //}
+
         foreach (var item in characterData)
         {
+            if (item == null) continue;
             characterExp.Add(item.entityName, 0);
             characterHP.Add(item.entityName, new Health(item.baseMaxHealth, item.baseMaxHealth));
         }
